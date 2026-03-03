@@ -2,11 +2,11 @@
 
 namespace CoursesApp.Domain.Security.RoleAggregate
 {
-    public class Role: IDomainEntity
+    public class Role: AggregateRoot, IDomainEntity
     {
         public Role() 
         { 
-        
+            Users = new List<User>();
         }
 
         public static Role CreateNew(string code, string name, string description)
@@ -17,7 +17,8 @@ namespace CoursesApp.Domain.Security.RoleAggregate
                 code = code,
                 Name = name,
                 Description = description,
-                status = RoleStatus.Active
+                status = RoleStatus.Active,
+                Users = new List<User>()
             };
         }
 
@@ -27,6 +28,7 @@ namespace CoursesApp.Domain.Security.RoleAggregate
         public string Description { get; private set; }
         public RoleStatus status { get; private set; }
 
+        public List<User> Users { get; private set; }
 
     }
 }
