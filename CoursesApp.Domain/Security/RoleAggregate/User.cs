@@ -40,5 +40,22 @@ namespace CoursesApp.Domain.Security.RoleAggregate
 
         public virtual Role Role { get; private set; }
 
+
+
+
+        internal bool ChangeFirstName(Guid id, string firstName)
+        {
+            if (string.IsNullOrWhiteSpace(firstName))
+                throw new ArgumentException("First name cannot be null or empty.", nameof(firstName));
+
+            if (FirstName != firstName)
+            {
+                FirstName = firstName;
+                return true;
+            }
+
+            return false;
+        }
+
     }
 }
