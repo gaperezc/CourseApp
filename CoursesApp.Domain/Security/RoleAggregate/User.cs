@@ -43,7 +43,7 @@ namespace CoursesApp.Domain.Security.RoleAggregate
 
 
 
-        internal bool ChangeFirstName(Guid id, string firstName)
+        internal bool ChangeFirstName(string firstName)
         {
             if (string.IsNullOrWhiteSpace(firstName))
                 throw new ArgumentException("First name cannot be null or empty.", nameof(firstName));

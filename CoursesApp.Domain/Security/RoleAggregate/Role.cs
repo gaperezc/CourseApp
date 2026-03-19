@@ -1,4 +1,5 @@
 ﻿using Common.Model;
+using CoursesApp.Domain.Security.RoleAggregate.Events;
 
 namespace CoursesApp.Domain.Security.RoleAggregate
 {
@@ -30,5 +31,31 @@ namespace CoursesApp.Domain.Security.RoleAggregate
 
         public List<User> Users { get; private set; }
 
-    }
-}
+
+        public void ChangeUserFirstName(Guid id, string firstName)
+        {
+            if (Users == null || Users.Count <= 0)
+            {
+                return;
+            }
+
+            User user = Users.SingleOrDefault(u => u.Id == id);
+
+            if (user == null)
+            {
+                return;
+            }
+
+            bool changed = user.ChangeFirstName(firstName);
+
+            if (changed)
+            {
+                   AddDomainEvent(new UserFirstNameChangedDomainEvent(id, firstName));
+            }
+        }
+
+
+     }
+
+ }
+
